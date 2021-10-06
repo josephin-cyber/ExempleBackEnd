@@ -47,5 +47,61 @@ exports.create = (req, res) =>{
 
     };
 
+    // update categorie
+    exports.update = (req, res) =>{
+
+        console.log("************************************controller");
+
+        const id = req.params.id;
+
+        Categorie.update( req.body, {
+            where: { id: id}, 
+        })
+        .then(num => {
+            if(num == 1) {
+                res.send({
+           message: `La catégorie a été modifiée avec succès`
+        });
+    }else {
+        res.send({
+            message: `La catégorie n' a pas été  trouvée`
+         });
+    }
+})
+        .catch(err =>{
+            res.status(500).send({
+                message: err.message || "Erreur en modifiant la catégorie id=" + id
+            });
+        });
+
+    };
+
+
+    exports.delete = (req, res) =>{
+
+        const id = req.params.id;
+
+        Categorie.destroy( {
+            where: { id: id}, 
+        })
+        .then(num => {
+            if(num == 1) {
+                res.send({
+           message: `La catégorie a été supprimée avec succès`
+        });
+    }else {
+        res.send({
+            message: `La catégorie n' a pas été  trouvée`
+         });
+    }
+})
+        .catch(err =>{
+            res.status(500).send({
+                message: err.message || "Erreur en supprimant la catégorie id=" + id
+            });
+        });
+
+    };
+
 
 

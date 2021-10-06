@@ -9,6 +9,15 @@ module.exports = app =>{
    
           // categorie list all
           router.get("/",  categories.findAll);
+
+          // update categorie id
+          console.log("************************************");
+          console.log(categories.update);
+	router.put('/:id', categories.update );
+
+
+       // delete categorie id
+    router.delete("/:id", categories.delete);
    
           app.use('/api/categories', router);
    
